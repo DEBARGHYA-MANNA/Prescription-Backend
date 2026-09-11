@@ -8,6 +8,9 @@ const AppError = require('./utils/AppError');
 const authRoutes = require('./routes/authRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const templateRoutes = require('./routes/templateRoutes');
+const patientRoutes = require('./routes/patientRoutes');
+const prescriptionRoutes = require('./routes/prescriptionRoutes');
+const sectionRoutes = require('./routes/sectionRoutes');
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -64,6 +67,9 @@ app.get('/api/v1/health', (req, res) => {
 app.use('/api/v1/auth', authLimiter, authRoutes);
 app.use('/api/v1/doctor', doctorRoutes);
 app.use('/api/v1/prescription-templates', templateRoutes);
+app.use('/api/v1/prescription-sections', sectionRoutes);
+app.use('/api/v1/patients', patientRoutes);
+app.use('/api/v1/prescriptions', prescriptionRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

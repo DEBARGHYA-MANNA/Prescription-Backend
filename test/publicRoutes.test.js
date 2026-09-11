@@ -42,6 +42,25 @@ test('template endpoint exposes the supported prescription layouts', async () =>
   ]);
 });
 
+test('section endpoint exposes the nine configurable prescription sections', async () => {
+  const { response, body } = await request('/api/v1/prescription-sections');
+
+  assert.equal(response.status, 200);
+  assert.equal(body.success, true);
+  assert.equal(body.data.sections.length, 9);
+  assert.deepEqual(body.data.sections.map((section) => section.id), [
+    'caseHistory',
+    'clinicalAssessment',
+    'repertory',
+    'dietaryRestrictions',
+    'investigationAdvice',
+    'prescribedMedicines',
+    'generalAdvice',
+    'followUpAndReporting',
+    'digitalSignature',
+  ]);
+});
+
 test('protected profile endpoint rejects a request without a token', async () => {
   const { response, body } = await request('/api/v1/doctor/profile');
 
